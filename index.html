@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Carta para Leslie</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(120deg, #ffe3ec, #fce4ec);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .hearts {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: rgba(255, 105, 180, 0.4);
+      transform: rotate(45deg);
+      animation: float 10s linear infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: inherit;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(45deg);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(45deg);
+        opacity: 1;
+      }
+    }
+
+    .carta-container {
+      perspective: 1200px;
+      z-index: 1;
+    }
+
+    .carta {
+      width: 600px;
+      height: 420px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 1s ease;
+      cursor: pointer;
+    }
+
+    .carta.open {
+      transform: rotateY(180deg);
+    }
+
+    .frente, .dorso {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .frente {
+      background: #f06292;
+      color: white;
+      font-size: 2.4em;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 4px #b71c1c;
+    }
+
+    .dorso {
+      background: white;
+      transform: rotateY(180deg);
+      font-family: 'Great Vibes', cursive;
+      font-size: 2em;
+      color: #880e4f;
+      line-height: 1.7;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .musica {
+      margin-top: 40px;
+      z-index: 2;
+    }
+
+    .musica button {
+      background-color: #ff80ab;
+      border: none;
+      padding: 12px 24px;
+      margin: 10px;
+      color: white;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background 0.3s ease;
+    }
+
+    .musica button:hover {
+      background-color: #ec407a;
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- corazones -->
+<div class="hearts">
+  <div class="heart" style="left: 10%; animation-delay: 0s;"></div>
+  <div class="heart" style="left: 30%; animation-delay: 2s;"></div>
+  <div class="heart" style="left: 50%; animation-delay: 4s;"></div>
+  <div class="heart" style="left: 70%; animation-delay: 6s;"></div>
+  <div class="heart" style="left: 90%; animation-delay: 8s;"></div>
+</div>
+
+<!-- carta -->
+<div class="carta-container">
+  <div class="carta" onclick="this.classList.toggle('open')">
+    <div class="frente">
+      ✉️ Carta para Leslie
+    </div>
+    <div class="dorso">
+      <p>
+        A Leslie, musa del sol:<br><br>
+        Tu risa danza en el viento,<br>
+        tu mirada es mi canción,<br>
+        y en cada dulce pensamiento,<br>
+        tú habitas mi corazón.<br><br>
+        Brillas con luz infinita,<br>
+        como estrella sin final,<br>
+        Leslie, flor de mis días,<br>
+        eres mi sueño real.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- botón música -->
+<div class="musica">
+  <button onclick="document.getElementById('musica').play()">🎵 Escuchar música</button>
+</div>
+
+<!-- música -->
+<audio id="musica" autoplay loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+  Tu navegador no soporta audio HTML5.
+</audio>
+
+</body>
+</html>
